@@ -2,7 +2,6 @@ import os
 import scipy
 import numpy as np
 import pandas as pd
-from tqdm import tqdm
 from sklearn import svm
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
@@ -16,10 +15,11 @@ data_path = './data/rri.csv'
 df = pd.read_csv(data_path)
 df = df.drop([0])
 
-# 
+# get the RRI of sleeping and waking state respectively
 rri_night = df['am4-3'].dropna().values.astype(float)
 rri_noon = df['pm4-5'].dropna().values.astype(float)
 
+# show the data
 plt.figure(figsize=(6,4))
 plt.subplot(1, 1, 1)
 plt.plot(rri_night)
@@ -32,7 +32,7 @@ plt.show()
 features = np.concatenate([rri_night, rri_noon])[:, np.newaxis]
 targets = np.concatenate([np.zeros(rri_night.shape[0]), np.ones(rri_noon.shape[0])])
 
-# split data into train set and test set
+# split the data into training and test set
 train_features, test_features, train_targets, test_targets = train_test_split(
     features, 
     targets, 
