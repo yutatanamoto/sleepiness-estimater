@@ -52,10 +52,10 @@ svc_classifier = svm.SVC()
 # train svc classifier
 svc_classifier.fit(normalized_train_features, train_targets)
 
-# predict using trained svc classifier
+# predict with trained svc classifier
 test_predictions = svc_classifier.predict(normalized_test_features)
 
-# caluculate accuracy
+# calculate accuracy
 accuracy = accuracy_score(test_targets, test_predictions)
 
 print('accuracy -> {}%'.format(accuracy*100))
